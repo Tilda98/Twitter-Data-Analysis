@@ -72,7 +72,7 @@ class TweetDfExtractor:
         return [tweet['created_at'] for tweet in self.tweets_list]
 
     def find_source(self) -> list:
-        source =
+        source = [tweet['source'] for tweet in self.tweets_list]
 
         return source
 
