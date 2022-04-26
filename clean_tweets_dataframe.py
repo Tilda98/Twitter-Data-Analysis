@@ -13,22 +13,25 @@ class Clean_Tweets:
     def drop_unwanted_column(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         remove rows that has column names. This error originated from
-        the data collection stage.  
+        the data collection stage.
         """
-        unwanted_rows = self.df[self.df['retweet_count']
-                                == 'retweet_count'].index
-        self.df.drop(unwanted_rows, inplace=True)
-        self.df = self.df[self.df['polarity'] != 'polarity']
 
-        return self.df
+        print(self.df)
+
+        unwanted_rows = df[df['retweet_count']
+                           == 'retweet_count'].index
+        df.drop(unwanted_rows, inplace=True)
+        df = df[df['polarity'] != 'polarity']
+
+        return df
 
     def drop_duplicate(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         drop duplicate rows
         """
-        self.df = self.df.drop_duplicates().drop_duplicates(subset='original_text')
+        df = df.drop_duplicates(keep=False, inplace=True)
 
-        return self.df
+        return df
 
     def convert_to_datetime(self, df: pd.DataFrame) -> pd.DataFrame:
         """
@@ -64,9 +67,10 @@ class Clean_Tweets:
         return self.df
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     data_frame = pd.read_csv('./data/processed_tweet_data.csv')
-    cleaner = Clean_Tweets(data_frame)
+    print(data_frame)
+    cleaner = Clean_Tweets(df=data_frame)
 
     data_frame = cleaner.drop_duplicate(data_frame)
     data_frame = cleaner.remove_non_english_tweets(data_frame)
@@ -74,5 +78,7 @@ if __name__ == 'main':
     data_frame = cleaner.convert_to_numbers(data_frame)
     data_frame = cleaner.drop_unwanted_column(data_frame)
 
-    data_frame.to_csv('./data/clean_processed_tweet_data.csv')
+    print(data_frame)
+
+    # data_frame.to_csv('./data/clean_processed_tweet_data.csv')
     print('Done cleaning and saving!!!')
