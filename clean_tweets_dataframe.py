@@ -1,3 +1,4 @@
+from traceback import print_tb
 import pandas as pd
 
 
@@ -27,8 +28,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        df = df.drop_duplicates(keep=False, inplace=True)
-
+        df = df.drop_duplicates()
         return df
 
     def convert_to_datetime(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -60,7 +60,7 @@ class Clean_Tweets:
         """
         remove non english tweets from lang
         """
-        self.df = self.df.query("lang == 'eng' ")
+        self.df = df[df['lang'] == 'en']
 
         return self.df
 
