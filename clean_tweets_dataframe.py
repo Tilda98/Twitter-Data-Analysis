@@ -26,8 +26,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-
-        ---
+        self.df = self.df.drop_duplicates().drop_duplicates(subset='original_text')
 
         return df
 
