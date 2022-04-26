@@ -123,8 +123,8 @@ class TweetDfExtractor:
 
     def find_hashtags(self) -> list:
         try:
-            hashtags = [tweet['retweeted_status']['extended_tweet']['entities']['hashtags'] if (
-                'retweeted_status' in tweet) and ('extended_tweet' in tweet['retweeted_status']) else '' for tweet in self.tweets_list]
+            hashtags = [tweet['retweeted_status']['entities']['hashtags']
+                        if 'retweeted_status' in tweet else '' for tweet in self.tweets_list]
         except KeyError:
             hashtags = ''
         return hashtags
