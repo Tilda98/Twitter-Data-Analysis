@@ -9,7 +9,6 @@ def read_json(json_file: str) -> list:
     Args:
     -----
     json_file: str - path of a json file
-
     Returns
     -------
     length of the json file and a list of json
@@ -25,7 +24,6 @@ def read_json(json_file: str) -> list:
 class TweetDfExtractor:
     """
     this function will parse tweets json into a pandas dataframe
-
     Return
     ------
     dataframe
@@ -97,9 +95,9 @@ class TweetDfExtractor:
     def is_sensitive(self) -> list:
         try:
             is_sensitive = [tweet['possibly_sensitive']
-                            for tweet in self.tweets_list]
+                            if 'possibly_sensitive' in tweet else None for tweet in self.tweets_list]
         except KeyError:
-            is_sensitive = None
+            is_sensitive = ""
 
         return is_sensitive
 
@@ -147,6 +145,13 @@ class TweetDfExtractor:
 
         return location
 
+    def find_lang(self) -> list:
+        try:
+            lang = [tweet['lang'] for tweet in self.tweets_list]
+        except TypeError:
+            lang = ''
+        return lang
+
     def get_tweet_df(self, save=False) -> pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
 
@@ -172,7 +177,7 @@ class TweetDfExtractor:
         df = pd.DataFrame(data=data, columns=columns)
 
         if save:
-            df.to_csv('/data/processed_tweet_data.csv', index=False)
+            df.to_csv('./data/processed_tweet_data.csv', index=False)
             print('File Successfully Saved.!!!')
 
         return df
@@ -182,8 +187,8 @@ if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
     columns = ['created_at', 'source', 'original_text', 'clean_text', 'sentiment', 'polarity', 'subjectivity', 'lang', 'favorite_count', 'retweet_count',
                'original_author', 'screen_count', 'followers_count', 'friends_count', 'possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
-    _, tweet_list = read_json("/data/Economic_Twitter_Data.json")
+    _, tweet_list = read_json("./data/Economic_Twitter_Data.json")
     tweet = TweetDfExtractor(tweet_list)
-    tweet_df = tweet.get_tweet_df()
+    tweet_df = tweet.get_tweet_df(save=True)
 
     # use all defined functions to generate a dataframe with the specified columns above

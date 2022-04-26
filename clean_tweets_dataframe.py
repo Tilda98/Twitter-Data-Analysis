@@ -65,7 +65,7 @@ class Clean_Tweets:
 
 
 if __name__ == 'main':
-    data_frame = pd.read_csv('/data/processed_tweet_data.csv')
+    data_frame = pd.read_csv('./data/processed_tweet_data.csv')
     cleaner = Clean_Tweets(data_frame)
 
     data_frame = cleaner.drop_duplicate(data_frame)
@@ -74,5 +74,5 @@ if __name__ == 'main':
     data_frame = cleaner.convert_to_numbers(data_frame)
     data_frame = cleaner.drop_unwanted_column(data_frame)
 
-    data_frame.to_csv('/data/clean_processed_tweet_data.csv')
+    data_frame.to_csv('./data/clean_processed_tweet_data.csv')
     print('Done cleaning and saving!!!')
