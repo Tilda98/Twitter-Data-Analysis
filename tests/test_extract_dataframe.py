@@ -84,8 +84,9 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_hashtags(), [[], [], [{'text': 'gold', 'indices': [
                          95, 100]}, {'text': 'silver', 'indices': [101, 108]}]])
 
-    # def test_find_mentions(self):
-    #     self.assertEqual(self.df.find_mentions(), )
+    def test_find_mentions(self):
+        self.assertEqual(self.df.find_mentions(), [{"screen_name": "SiriaBlack_II", "name": "Daniela Seidel",
+                         "id": 1464671586921947142, "id_str": "1464671586921947142", "indices": [3, 17]}])
 
     def test_find_location(self):
         self.assertEqual(self.df.find_location(), [
