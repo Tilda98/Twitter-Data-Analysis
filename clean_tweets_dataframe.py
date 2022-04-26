@@ -62,3 +62,17 @@ class Clean_Tweets:
         self.df = self.df.query("lang == 'eng' ")
 
         return self.df
+
+
+if __name__ == 'main':
+    data_frame = pd.read_csv('./data/covid19.csv')
+    cleaner = Clean_Tweets(data_frame)
+
+    data_frame = cleaner.drop_duplicate(data_frame)
+    data_frame = cleaner.remove_non_english_tweets(data_frame)
+    data_frame = cleaner.convert_to_datetime(data_frame)
+    data_frame = cleaner.convert_to_numbers(data_frame)
+    data_frame = cleaner.drop_unwanted_column(data_frame)
+
+    data_frame.to_csv('./data/clean_processed_tweet_data.csv')
+    print('Done cleaning and saving!!!')
