@@ -16,8 +16,6 @@ class Clean_Tweets:
         the data collection stage.
         """
 
-        print(self.df)
-
         unwanted_rows = df[df['retweet_count']
                            == 'retweet_count'].index
         df.drop(unwanted_rows, inplace=True)
@@ -69,7 +67,6 @@ class Clean_Tweets:
 
 if __name__ == '__main__':
     data_frame = pd.read_csv('./data/processed_tweet_data.csv')
-    print(data_frame)
     cleaner = Clean_Tweets(df=data_frame)
 
     data_frame = cleaner.drop_duplicate(data_frame)
@@ -77,8 +74,6 @@ if __name__ == '__main__':
     data_frame = cleaner.convert_to_datetime(data_frame)
     data_frame = cleaner.convert_to_numbers(data_frame)
     data_frame = cleaner.drop_unwanted_column(data_frame)
-
-    print(data_frame)
 
     # data_frame.to_csv('./data/clean_processed_tweet_data.csv')
     print('Done cleaning and saving!!!')
