@@ -96,7 +96,8 @@ class TweetDfExtractor:
 
     def is_sensitive(self) -> list:
         try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
+            is_sensitive = [tweet['possibly_sensitive']
+                            for tweet in self.tweets_list]
         except KeyError:
             is_sensitive = None
 
