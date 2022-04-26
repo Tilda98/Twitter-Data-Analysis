@@ -39,7 +39,7 @@ class TweetDfExtractor:
     def find_statuses_count(self) -> list:
         try:
             statuses_count = [tweet['user']['statuses_count']
-                              if 'user' in tweet else '' for tweet in self.tweet_list]
+                              if 'user' in tweet else '' for tweet in self.tweets_list]
         except TypeError:
             statuses_count = ''
         return statuses_count
@@ -53,12 +53,23 @@ class TweetDfExtractor:
         return text
 
     def find_sentiments(self, text) -> list:
+        polarity = []
+        subjectivity = []
 
-        return polarity, self.subjectivity
+        for each in text:
+            if (each):
+                result = TextBlob(str(each)).sentiment
+                polarity.append(result.polarity)
+                subjectivity.append(result.subjectivity)
+            else:
+                polarity.append("")
+                subjectivity.append("")
+
+        return polarity, subjectivity
 
     def find_created_time(self) -> list:
 
-        return created_at
+        return [tweet['created_at'] for tweet in self.tweets_list]
 
     def find_source(self) -> list:
         source =
