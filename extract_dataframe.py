@@ -130,7 +130,13 @@ class TweetDfExtractor:
         return hashtags
 
     def find_mentions(self) -> list:
-        mentions =
+        try:
+            mentions = [tweet['retweeted_staus']['entities']['user_mentions']
+                        if 'extended_tweet' in tweet else "" for tweet in self.tweets_list]
+        except KeyError:
+            mentions = ""
+
+        return mentions
 
     def find_location(self) -> list:
         try:
