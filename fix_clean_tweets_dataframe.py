@@ -1,9 +1,9 @@
-from pandas import pandas as pd
+import pandas as pd
 
 
 class Clean_Tweets:
     """
-    The PEP8 Standard AMAZING!!!
+    This class will clean the twitter data and return a clean data frame
     """
 
     def __init__(self, df: pd.DataFrame):
