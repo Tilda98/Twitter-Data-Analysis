@@ -122,7 +122,12 @@ class TweetDfExtractor:
         return retweet_count
 
     def find_hashtags(self) -> list:
-        hashtags =
+        try:
+            hashtags = [tweet['retweeted_status']['extended_tweet']['entities']['hashtags'] if (
+                'retweeted_status' in tweet) and ('extended_tweet' in tweet['retweeted_status']) else '' for tweet in self.tweets_list]
+        except KeyError:
+            hashtags = ''
+        return hashtags
 
     def find_mentions(self) -> list:
         mentions =
