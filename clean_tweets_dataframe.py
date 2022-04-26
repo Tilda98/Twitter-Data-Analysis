@@ -75,5 +75,5 @@ if __name__ == '__main__':
     data_frame = cleaner.convert_to_numbers(data_frame)
     data_frame = cleaner.drop_unwanted_column(data_frame)
 
-    # data_frame.to_csv('./data/clean_processed_tweet_data.csv')
+    data_frame.to_csv('./data/clean_processed_tweet_data.csv')
     print('Done cleaning and saving!!!')
