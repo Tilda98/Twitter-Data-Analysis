@@ -21,29 +21,46 @@ def read_json(json_file: str)->list:
     
     return len(tweets_data), tweets_data
 
+
 class TweetDfExtractor:
     """
     this function will parse tweets json into a pandas dataframe
-    
     Return
     ------
     dataframe
     """
+
     def __init__(self, tweets_list):
         
         self.tweets_list = tweets_list
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count 
+        try:
+            statuses_count = [tweet['user']['statuses_count']
+                              if 'user' in tweet else '' for tweet in self.tweets_list]
+        except TypeError:
+            statuses_count = ''
+        return statuses_count
         
     def find_full_text(self)->list:
-        text = 
+        try:
+            text = [tweet['retweeted_status']['text']
+                    if 'retweeted_status' in tweet else '' for tweet in self.tweets_list]
+        except TypeError:
+            text = ''
+        return text
        
-    
     def find_sentiments(self, text)->list:
         
-        return polarity, self.subjectivity
+        polarity, subjectivity = [], []
+        for tweet in text:
+            blob = TextBlob(tweet)
+            sentiment = blob.sentiment
+            polarity.append(sentiment.polarity)
+            subjectivity.append(sentiment.subjectivity)
+
+        return polarity, subjectivity
 
     def find_created_time(self)->list:
        
