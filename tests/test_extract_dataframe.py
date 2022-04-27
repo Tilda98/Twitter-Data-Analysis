@@ -83,8 +83,8 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_hashtags(), [[],[],[],[{'text': 'Deutschen', 'indices': [4, 14]}, {'text': 'Spritpreisen', 'indices': [42, 55]}, {'text': 'inflation', 'indices': [83, 93]}],[]])
 
 
-    # def test_find_mentions(self):
-    #     self.assertEqual(self.df.find_mentions(), )
+    def test_find_mentions(self):
+        self.assertEqual(self.df.find_mentions(), ['','','','',''])
 
     def test_find_location(self):
         self.assertEqual(self.df.find_location(), ['Mass', 'Edinburgh, Scotland', None, None, 'United Kingdom'])
