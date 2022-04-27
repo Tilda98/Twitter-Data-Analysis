@@ -77,8 +77,8 @@ class TestTweetDfExtractor(unittest.TestCase):
                          [2356, 1985, 16, 1242, 1329])
                          
     def test_find_retweet_count(self):
-        self.assertEqual(self.df.find_retweet_count(), [612, 92, 1, 899, 20])
-
+        self.assertEqual(self.df.find_retweet_count(), [355, 505, 4, 332, 386])
+        
     # def test_find_hashtags(self):
     #     self.assertEqual(self.df.find_hashtags(), )
 
