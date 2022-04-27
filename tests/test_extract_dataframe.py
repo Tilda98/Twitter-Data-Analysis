@@ -1,8 +1,11 @@
+import unittest
 import pandas as pd
 import unittest
 import sys
 import os
+
 sys.path.append(os.path.abspath(os.path.join('..')))
+
 from extract_dataframe import TweetDfExtractor
 from extract_dataframe import read_json
 
