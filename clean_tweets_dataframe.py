@@ -1,4 +1,6 @@
+from traceback import print_tb
 import pandas as pd
+
 
 class Clean_Tweets:
     """
@@ -13,30 +15,34 @@ class Clean_Tweets:
         remove rows that has column names. This error originated from
         the data collection stage.  
         """
+
+
         unwanted_rows = df[df['retweet_count'] == 'retweet_count' ].index
-        df.drop(unwanted_rows , inplace=True)
-        df = df[df['polarity'] != 'polarity']
+        self.df.drop(unwanted_rows , inplace=True)
+        self.df = self.df[self.df['polarity'] != 'polarity']
         
-        return df
+        return self.df
+
+
     def drop_duplicate(self, df:pd.DataFrame)->pd.DataFrame:
         """
         drop duplicate rows
         """
-        
-        ---
+        df = df.drop_duplicates()
         
         return df
+
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
         """
-        ----
         
-        ----
-        
-        df = df[df['created_at'] >= '2020-12-31' ]
-        
-        return df
+        self.df['created_at'] = pd.to_datetime(
+            self.df['created_at'], errors='coerce')
+
+        self.df = self.df[self.df['created_at'] >= '2020-12-31']
+
+        return self.df
     
     def convert_to_numbers(self, df:pd.DataFrame)->pd.DataFrame:
         """
